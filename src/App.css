@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.app-label{
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: white;
+  pointer-events: none;
+}
+
+.map-container{
+  height: 60vh;
+  width: 100%;
+}
+
+.clicked-coord-label{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: white;
+  border-radius: 5px;
+}
+
+.clicked-coord-label p {
+  margin: 10px;
+}
+
+.texto{
+  font-family: monospace;
+  border-right: 2.5px solid green;
+
+  animation: cursor .5s infinite, 
+  escribiendo 3.5s steps(10,end);
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+.escribiendo {
+  display: inline-block;
+}
+
+@keyframes cursor {
+
+  0% {border-color: transparent}
+  50% {border-color: green}
+}
+@keyframes escribiendo {
+
+  from{width:0}
+  to{width: 100%}
+  
+}
