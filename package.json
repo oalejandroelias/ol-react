@@ -11,6 +11,7 @@
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
+    "ol": "^6.14.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },

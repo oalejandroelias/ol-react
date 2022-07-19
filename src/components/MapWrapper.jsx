@@ -31,23 +31,11 @@ function MapWrapper(props) {
   const mapRef = useRef()
   mapRef.current = map
 
+  var base_url = window.location.protocol + "//" + window.location.host;
 
   // initialize map on first render - logic formerly put into componentDidMount
   useEffect( () => {
 
-    var imageTile = new ImageLayer({
-      title: "Capa",
-       extent: [-180, -90, -180, 90],
-      source: new ImageWMS({
-        // url: "http://aicsig.neuquen.gov.ar:8080"+'/geoserver/wms',
-        url: "http://localhost:8082/geoserver/wms?request=getCapabilities",
-        params: { LAYERS: "Copade:NEUQUEN_PROVINCIA" },
-        ratio: 1,
-        serverType: "geoserver",
-        crossOrigin: "anonymous",
-      }),
-      //opacity: 0.9
-    });
 
     // create and add vector source layer
     const initalFeaturesLayer = new VectorLayer({
@@ -76,7 +64,6 @@ function MapWrapper(props) {
         }), */
 
         initalFeaturesLayer,
-        imageTile
         
       ],
       view: new View({
@@ -86,7 +73,25 @@ function MapWrapper(props) {
       }),
       controls: []
     })
-  
+
+    var imageTile = new ImageLayer({
+      title: "Capa",
+       extent: [-180, -90, -180, 90],
+      source: new ImageWMS({
+        // url: "http://aicsig.neuquen.gov.ar:8080"+'/geoserver/wms',
+        url: base_url+"/geoserver/wms?request=getCapabilities",
+        //url: "http://giscopade.neuquen.gov.ar/geoserver/wms?request=getCapabilities",
+        params: { LAYERS: "Copade:barrios_junin_d_andes" },
+        
+        serverType: "geoserver",
+        crossOrigin: "anonymous",
+      }),
+      //opacity: 0.9
+    });
+    
+   // if (props.features.length) {
+      initialMap.addLayer(imageTile);
+   // }
 
     // set map onclick handler
     initialMap.on('click', handleMapClick)
