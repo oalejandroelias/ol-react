@@ -31,11 +31,11 @@ const Map = ({ children, zoom, center }) => {
 	}, [zoom]);
 
 	// center change handler
-	useEffect(() => {
-		if (!map) return;
+	// useEffect(() => {
+	// 	if (!map) return;
 
-		map.getView().setCenter(center)
-	}, [center])
+	// 	map.getView().setCenter(center)
+	// }, [center])
 
 	return (
 		<MapContext.Provider value={{ map }}>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Map from "./Map";
-import { Layers, TileLayer, VectorLayer } from "./Layers";
+import { Layers, TileLayer, VectorLayer, ImageLayer, WMSTile } from "./Layers";
 import { Style, Icon } from "ol/style";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
-import { osm, vector } from "./Source";
+import { osm, vector, image } from "./Source";
 import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import { Controls, FullScreenControl } from "./Controls";
@@ -16,6 +16,10 @@ import "./App.css";
 const geojsonObject = mapConfig.geojsonObject;
 const geojsonObject2 = mapConfig.geojsonObject2;
 const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
+// const base_url = window.location.protocol + "//" + window.location.host;
+const base_url = "http://giscopade.neuquen.gov.ar/";
+
+console.log(base_url);
 
 function addMarkers(lonLatArray) {
   var iconStyle = new Style({
@@ -23,6 +27,9 @@ function addMarkers(lonLatArray) {
       anchorXUnits: "fraction",
       anchorYUnits: "pixels",
       src: mapConfig.markerImage32,
+      //size: 10,
+      //imgSize: 100
+      scale: 0.09,
     }),
   });
   let features = lonLatArray.map((item) => {
@@ -60,6 +67,34 @@ const App = () => {
               style={FeatureStyles.MultiPolygon}
             />
           )}
+          {showLayer1 && (
+            <ImageLayer 
+              source={image({
+                title: "AAA",
+                url: base_url+"/geoserver/wms",
+                params: { LAYERS: "topp:tasmania_water_bodies" },
+                ratio: 1,
+                serverType: "geoserver",
+                //visible: true,
+                crossOrigin: "anonymous",
+                zIndex: 5
+              })}
+              style={FeatureStyles.MultiPolygon}
+            />
+          )}
+          {showLayer1 && (
+           
+            <TileLayer
+            source={WMSTile(base_url+"/geoserver/wms", {
+              LAYERS: "Copade:nqn_ciudades",
+              Tiled: true,
+            }
+          )}
+          zIndex={0}
+          />
+
+          )},
+          
           {showLayer2 && (
             <VectorLayer
               source={vector({

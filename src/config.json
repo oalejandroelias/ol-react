@@ -66,6 +66,6 @@
     "kansasCityLonLat": [-94.579228, 39.135386],
     "blueSpringsLonLat": [-94.279851, 39.03412],
     "markerImage24" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-24.png",
-    "markerImage32" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-32.png",
+    "markerImage32" : "http://localhost:3000/src/assets/img/location.png",
     "markerImage64" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-64.png"
 }
